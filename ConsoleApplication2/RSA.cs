@@ -134,61 +134,45 @@ namespace RSA {
         static BigInteger encode(BigInteger x) {
             BigInteger e = klucz[0];
             BigInteger n = klucz[1];
-            if (x > n)
-                throw new Exception("tó macz");
             return x.modPow(e, n);
         }
 
         static BigInteger decode(BigInteger c) {
             BigInteger d = klucz[0];
             BigInteger n = klucz[1];
-            if (c > n)
-                throw new Exception("tó macz");
             return c.modPow(d, n);
         }
 
-        static T[] pad<T>(T[] ary, int length) {
-            T[] newAry = new T[length];
-            Array.Copy(ary, 0, newAry, length - ary.Length, ary.Length);
-            return newAry;
-        }
+        //private static void drawTextProgressBar(long progress, long total) {
+        //    //draw empty progress bar
+        //    Console.CursorLeft = 0;
+        //    Console.Write("["); //start
+        //    Console.CursorLeft = 32;
+        //    Console.Write("]"); //end
+        //    Console.CursorLeft = 1;
+        //    float onechunk = 30.0f / total;
 
-        static void pad<T>(ref T[] ary, int length) {
-            T[] newAry = new T[length];
-            Array.Copy(ary, 0, newAry, length - ary.Length, ary.Length);
-            ary = newAry;
-        }
+        //    //draw filled part
+        //    int position = 1;
+        //    for (long i = 0; i < onechunk * progress; i++) {
+        //        Console.BackgroundColor = ConsoleColor.Gray;
+        //        Console.CursorLeft = position++;
+        //        Console.Write(" ");
+        //    }
 
-        private static void drawTextProgressBar(long progress, long total) {
-            //draw empty progress bar
-            Console.CursorLeft = 0;
-            Console.Write("["); //start
-            Console.CursorLeft = 32;
-            Console.Write("]"); //end
-            Console.CursorLeft = 1;
-            float onechunk = 30.0f / total;
+        //    //draw unfilled part
+        //    for (long i = position; i <= 31; i++) {
+        //        Console.BackgroundColor = ConsoleColor.Black;
+        //        Console.CursorLeft = position++;
+        //        Console.Write(" ");
+        //    }
 
-            //draw filled part
-            int position = 1;
-            for (long i = 0; i < onechunk * progress; i++) {
-                Console.BackgroundColor = ConsoleColor.Gray;
-                Console.CursorLeft = position++;
-                Console.Write(" ");
-            }
-
-            //draw unfilled part
-            for (long i = position; i <= 31; i++) {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.CursorLeft = position++;
-                Console.Write(" ");
-            }
-
-            //draw totals
-            Console.CursorLeft = 35;
-            Console.BackgroundColor = ConsoleColor.Black;
-            //Console.Write(progress.ToString() + " of " + total.ToString() + "    "); //blanks at the end remove any excess
-            Console.Write("{0:D" + bctl + "} z {1} {2}bitowych blokow", progress, total, keysize);
-        }
+        //    //draw totals
+        //    Console.CursorLeft = 35;
+        //    Console.BackgroundColor = ConsoleColor.Black;
+        //    //Console.Write(progress.ToString() + " of " + total.ToString() + "    "); //blanks at the end remove any excess
+        //    Console.Write("{0:D" + bctl + "} z {1} {2}bitowych blokow", progress, total, keysize);
+        //}
     }
 }
 
